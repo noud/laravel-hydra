@@ -1,0 +1,42 @@
+{
+    "name": "arbee/laravel-hydra",
+    "description": "Create a Hydra spec compliant API with Laravel",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ryan Brown",
+            "email": "rbrown_1193@hotmail.com"
+        }
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.2.5",
+        "illuminate/support": "^7.9"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^5.1",
+        "phpunit/phpunit": "^9.1",
+        "squizlabs/php_codesniffer": "^3.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Arbee\\LaravelHydra\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Arbee\\LaravelHydra\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Arbee\\LaravelHydra\\HydraServiceProvider"
+            ]
+        }
+    }
+}
