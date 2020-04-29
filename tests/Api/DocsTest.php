@@ -33,10 +33,10 @@ class DocsTest extends TestCase
     }
 
     /** @test */
-    public function itIncludesHydraApiDocumentationMetadata()
+    public function itIncludesHydraApiDocumentationProperties()
     {
         $this->get(self::DOCS_URI)
             ->assertStatus(200)
-            ->assertJsonStructure(['hydra:title', 'hydra:description', 'hydra:supportedClass']);
+            ->assertJsonStructure(['hydra:title', 'hydra:description', 'hydra:supportedClass', 'hydra:entrypoint']);
     }
 }

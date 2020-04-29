@@ -7,9 +7,11 @@ use Arbee\LaravelHydra\Http\Responses\JsonLdResponse;
 class DocsController
 {
     /**
-     * @return JsonLdResponse
+     * Handle a request to the API documentation route
+     *
+     * @return \Arbee\LaravelHydra\Http\Responses\JsonLdResponse
      */
-    public function __invoke()
+    public function __invoke(): JsonLdResponse
     {
         return new JsonLdResponse(
             [
@@ -23,6 +25,7 @@ class DocsController
                 '@type' => 'hydra:ApiDocumentation',
                 'hydra:title' => config('hydra.title'),
                 'hydra:description' => config('hydra.description'),
+                'hydra:entrypoint' => action(EntrypointController::class),
                 'hydra:supportedClass' => [],
             ]
         );

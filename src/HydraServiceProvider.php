@@ -18,9 +18,8 @@ class HydraServiceProvider extends ServiceProvider
         // Config path not available in Lumen
         if (function_exists('config_path')) {
             $this->publishes(
-                [
-                __DIR__.'/config.php' => config_path('hydra.php'),
-                ], 'config'
+                [__DIR__.'/config.php' => config_path('hydra.php')],
+                'config'
             );
         }
     }
