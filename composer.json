@@ -15,7 +15,10 @@
     "minimum-stability": "stable",
     "require": {
         "php": "^7.2.5",
-        "illuminate/support": "^7.9"
+        "illuminate/config": "^7.0",
+        "illuminate/http": "^7.0",
+        "illuminate/routing": "^7.0",
+        "illuminate/support": "^7.0"
     },
     "require-dev": {
         "orchestra/testbench": "^5.1",
