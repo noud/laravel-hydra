@@ -3,9 +3,25 @@
 namespace Arbee\LaravelHydra\Http\Controllers;
 
 use Arbee\LaravelHydra\Http\Responses\JsonLdResponse;
+use Arbee\LaravelHydra\HydraClassRegistry;
 
 class DocsController
 {
+    /**
+     * The Hydra class registry
+     *
+     * @var \Arbee\LaravelHydra\HydraClassRegistry
+     */
+    protected $classes;
+
+    /**
+     * @param \Arbee\LaravelHydra\HydraClassRegistry $registry
+     */
+    public function __construct(HydraClassRegistry $classes)
+    {
+        $this->classes = $classes;
+    }
+
     /**
      * Handle a request to the API documentation route
      *
@@ -26,7 +42,7 @@ class DocsController
                 'hydra:title' => config('hydra.title'),
                 'hydra:description' => config('hydra.description'),
                 'hydra:entrypoint' => action(EntrypointController::class),
-                'hydra:supportedClass' => [],
+                'hydra:supportedClass' => $this->classes->toJsonLd(),
             ]
         );
     }

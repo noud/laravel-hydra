@@ -2,10 +2,18 @@
 
 namespace Arbee\LaravelHydra;
 
+use Arbee\LaravelHydra\Http\Resources\EntrypointClass;
 use Illuminate\Support\ServiceProvider;
 
 class HydraServiceProvider extends ServiceProvider
 {
+    /**
+     * The classes that are supported by the Hydra API
+     *
+     * @var array
+     */
+    protected $supportedClasses = [];
+
     /**
      * Bootstrap any application services.
      *
@@ -22,5 +30,19 @@ class HydraServiceProvider extends ServiceProvider
                 'config'
             );
         }
+    }
+
+    /**
+     * Register services for the application
+     */
+    public function register()
+    {
+        $this->supportedClasses[] = EntrypointClass::class;
+        $this->app->singleton(
+            HydraClassRegistry::class,
+            function () {
+                return new HydraClassRegistry($this->supportedClasses);
+            }
+        );
     }
 }

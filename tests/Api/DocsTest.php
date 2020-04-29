@@ -11,7 +11,7 @@ class DocsTest extends TestCase
     /** @test */
     public function itReturnsJsonLdContentTypeHeader()
     {
-        $this->get(self::DOCS_URI)
+        $this->getJson(self::DOCS_URI)
             ->assertStatus(200)
             ->assertHeader('Content-Type', 'application/ld+json');
     }
@@ -19,7 +19,7 @@ class DocsTest extends TestCase
     /** @test */
     public function itReturnsLinkedData()
     {
-        $this->get(self::DOCS_URI)
+        $this->getJson(self::DOCS_URI)
             ->assertStatus(200)
             ->assertJsonStructure(['@context', '@id', '@type']);
     }
@@ -27,7 +27,7 @@ class DocsTest extends TestCase
     /** @test */
     public function itHasTypeApiDocumentation()
     {
-        $this->get(self::DOCS_URI)
+        $this->getJson(self::DOCS_URI)
             ->assertStatus(200)
             ->assertJsonFragment(['@type' => 'hydra:ApiDocumentation']);
     }
@@ -35,7 +35,7 @@ class DocsTest extends TestCase
     /** @test */
     public function itIncludesHydraApiDocumentationProperties()
     {
-        $this->get(self::DOCS_URI)
+        $this->getJson(self::DOCS_URI)
             ->assertStatus(200)
             ->assertJsonStructure(['hydra:title', 'hydra:description', 'hydra:supportedClass', 'hydra:entrypoint']);
     }
