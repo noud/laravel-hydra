@@ -23,11 +23,13 @@ class SupportedClassSerializer
             );
         }
 
-        $id = filter_var($class::contextId(), FILTER_VALIDATE_URL);
+        $iri = filter_var($class::iri(), FILTER_VALIDATE_URL);
         return [
-            '@id' => $id ?: 'vocab:' . $class::contextId(),
+            '@id' => $iri ?: 'vocab:' . $class::iri(),
             '@type' => 'hydra:Class',
             'hydra:title' => $class::title(),
+            'hydra:supportedProperties' => $class::supportedProperties(),
+            'hydra:supportedOperations' => $class::supportedOperations(),
         ];
     }
 }

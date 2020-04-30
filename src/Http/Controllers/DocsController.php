@@ -36,12 +36,13 @@ class DocsController
                     'hydra' => 'http://www.w3.org/ns/hydra/core#',
                     'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
                     'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
+                    'owl' => 'http://www.w3.org/2002/07/owl#',
                 ],
                 '@id' => url()->current(),
                 '@type' => 'hydra:ApiDocumentation',
                 'hydra:title' => config('hydra.title'),
                 'hydra:description' => config('hydra.description'),
-                'hydra:entrypoint' => action(EntrypointController::class),
+                'hydra:entrypoint' => config('hydra.entrypoint'),
                 'hydra:supportedClass' => $this->classes->toJsonLd(),
             ]
         );

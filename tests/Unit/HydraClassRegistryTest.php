@@ -3,6 +3,8 @@
 namespace Arbee\LaravelHydra\Tests\Unit;
 
 use Arbee\LaravelHydra\HydraClassRegistry;
+use Arbee\LaravelHydra\Hydra\SupportedPropertyCollection;
+use Arbee\LaravelHydra\Hydra\SupportedOperationCollection;
 use Arbee\LaravelHydra\Tests\Stubs\BasicHydraClass;
 use PHPUnit\Framework\TestCase;
 
@@ -17,9 +19,11 @@ class HydraClassRegistryTest extends TestCase
 
         $this->assertJson($jsonLd);
         $basicOutput = [
-            '@id' => 'vocab:' . BasicHydraClass::contextId(),
+            '@id' => 'vocab:' . BasicHydraClass::iri(),
             '@type' => 'hydra:Class',
             'hydra:title' => BasicHydraClass::title(),
+            'hydra:supportedProperties' => new SupportedPropertyCollection(),
+            'hydra:supportedOperations' => new SupportedOperationCollection(),
         ];
         $expected = json_encode([
             $basicOutput,

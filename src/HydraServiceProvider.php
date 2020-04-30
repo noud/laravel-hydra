@@ -37,7 +37,6 @@ class HydraServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->supportedClasses[] = EntrypointClass::class;
         $this->app->singleton(
             HydraClassRegistry::class,
             function () {
