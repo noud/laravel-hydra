@@ -2,13 +2,13 @@
 
 namespace Arbee\LaravelHydra\Tests;
 
+use Arbee\LaravelHydra\Exceptions\InvalidHydraClassException;
 use Arbee\LaravelHydra\Hydra\SupportedOperationCollection;
 use Arbee\LaravelHydra\Hydra\SupportedPropertyCollection;
 use Arbee\LaravelHydra\Serializers\SupportedClassSerializer;
 use Arbee\LaravelHydra\Tests\Stubs\BasicHydraClass;
 use Arbee\LaravelHydra\Tests\Stubs\InvalidHydraClass;
 use Arbee\LaravelHydra\Tests\Stubs\SchemaHydraClass;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class SupportedClassSerializerTest extends TestCase
@@ -44,7 +44,7 @@ class SupportedClassSerializerTest extends TestCase
     /** @test */
     public function itThrowsAnInvalidArgumentExceptionIfInputDoesNotImplementHydraClass()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(InvalidHydraClassException::class);
         SupportedClassSerializer::toArray(InvalidHydraClass::class);
     }
 }

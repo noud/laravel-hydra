@@ -30,12 +30,10 @@ class SupportedProperty
     protected $type = 'hydra:SupportedProperty';
 
     /**
-     * @param string $iri
      * @param \Arbee\LaravelHydra\Hydra\Property $property
      */
-    public function __construct(string $iri, Property $property)
+    public function __construct(Property $property)
     {
-        $this->iri = $iri;
         $this->property = $property;
     }
 

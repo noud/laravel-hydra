@@ -25,8 +25,8 @@ class Entrypoint implements HydraClass
     public static function supportedProperties(): SupportedPropertyCollection
     {
         $bookLinkOperations = new SupportedOperationCollection(
-            new Operation('GET', 'Fetch the books', null, BookCollection::class),
-            new Operation('POST', 'Create a new book', Book::class, Book::class, [200 => 'OK', 422 => 'Validation failed'])
+            new Operation('GET', 'Fetch the books', null, BookCollection::iri()),
+            new Operation('POST', 'Create a new book', Book::iri)(), Book::iri(), [200 => 'OK', 422 => 'Validation failed'])
         );
         $booksLink = new LinkProperty('/book', $bookLinkOperations);
 

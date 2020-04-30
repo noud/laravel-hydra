@@ -2,8 +2,7 @@
 
 namespace Arbee\LaravelHydra\Serializers;
 
-use Arbee\LaravelHydra\Contracts\HydraClass;
-use InvalidArgumentException;
+use Arbee\LaravelHydra\Support\HydraUtils;
 
 class SupportedClassSerializer
 {
@@ -16,12 +15,7 @@ class SupportedClassSerializer
      */
     public static function toArray(string $class): array
     {
-        $interfaces = class_implements($class);
-        if (!$interfaces || !in_array(HydraClass::class, $interfaces)) {
-            throw new InvalidArgumentException(
-                "Supported classes must implement \Arbee\LaravelHydra\Contracts\HydraClass"
-            );
-        }
+        HydraUtils::assertValidHydraClass($class);
 
         $iri = filter_var($class::iri(), FILTER_VALIDATE_URL);
         return [

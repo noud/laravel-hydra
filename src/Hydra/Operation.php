@@ -2,22 +2,65 @@
 
 namespace Arbee\LaravelHydra\Hydra;
 
+use Arbee\LaravelHydra\Support\HydraUtils;
+use InvalidArgumentException;
+
 class Operation
 {
+    /**
+     * The HTTP method for the operation
+     *
+     * @var string
+     */
     protected $method;
 
+    /**
+     * The operation title
+     *
+     * @var string
+     */
     protected $title;
 
+    /**
+     * The input type for the operation
+     *
+     * @var \Arbee\LaravelHydra\Contracts\HydraClass | null
+     */
     protected $expects;
 
+    /**
+     * The return type of the operation
+     *
+     * @var \Arbee\LaravelHydra\Contracts\HydraClass | null
+     */
     protected $returns;
 
+    /**
+     * An array of statuses the operation could possibly return
+     *
+     * @var array
+     */
     protected $statuses;
 
-    protected $expectsHeaders;
+    /**
+     * The expected HTTP header that should be sent with the operation request
+     *
+     * @var string
+     */
+    protected $expectsHeader;
 
-    protected $returnsHeaders;
+    /**
+     * The HTTP header that will be returned with the response
+     *
+     * @var string
+     */
+    protected $returnsHeader;
 
+    /**
+     * The operation type
+     *
+     * @var string
+     */
     protected $type = 'hydra:Operation';
 
     /**
@@ -26,8 +69,8 @@ class Operation
      * @param string|null $expects
      * @param string|null $returns
      * @param array $statuses
-     * @param array $expectsHeaders
-     * @param array $returnsHeaders
+     * @param string $expectsHeaders
+     * @param string $returnsHeaders
      *
      * @todo Validate arguments?
      */
@@ -37,16 +80,23 @@ class Operation
         ?string $expects = null,
         ?string $returns = null,
         array $statuses = [],
-        array $expectsHeaders = [],
-        array $returnsHeaders = []
+        ?string $expectsHeader = null,
+        ?string $returnsHeader = null
     ) {
+        if (!$this->isValidRequestMethod($method)) {
+            throw new InvalidArgumentException('Operation method is not valid');
+        }
+
+        HydraUtils::assertValidHydraClassOrNull($expects);
+        HydraUtils::assertValidHydraClassOrNull($returns);
+
         $this->method = $method;
         $this->title = $title;
-        $this->expects = $expects;
-        $this->returns = $returns;
+        $this->expects = is_null($expects) ? null : $expects::iri();
+        $this->returns = is_null($returns) ? null : $returns::iri();
         $this->statuses = $statuses;
-        $this->expectsHeaders = $expectsHeaders;
-        $this->returnsHeaders = $returnsHeaders;
+        $this->expectsHeaders = $expectsHeader;
+        $this->returnsHeaders = $returnsHeader;
     }
 
     /**
@@ -58,7 +108,7 @@ class Operation
     {
         $operation = [
             '@type' => $this->type,
-            'hydra:method' => $this->method,
+            'hydra:method' => strtoupper($this->method),
             'hydra:title' => $this->title,
             'hydra:expects' => $this->expects,
             'hydra:returns' => $this->returns,
@@ -71,5 +121,17 @@ class Operation
         return array_filter($operation, function ($value) {
             return !(is_null($value) || empty($value));
         });
+    }
+
+    /**
+     * Check if the operation method is valid
+     *
+     * @param string $method
+     *
+     * @return boolean
+     */
+    protected function isValidRequestMethod(string $method): bool
+    {
+        return in_array(strtoupper($method), ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'PATCH', 'POST', 'PUT']);
     }
 }
