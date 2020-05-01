@@ -32,4 +32,17 @@ class HydraUtils
         }
         self::assertValidSupportedClass($class);
     }
+
+    /**
+     * Check if an IRI is a compact IRI according to the JsonLD spec
+     *
+     * @param string $iri
+     *
+     * @return boolean
+     */
+    public static function isCompactIri(string $iri): bool
+    {
+        $separatorPos = strpos($iri, ':');
+        return $separatorPos && !substr($iri, $separatorPos, 2) == '//';
+    }
 }

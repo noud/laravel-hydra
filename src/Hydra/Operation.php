@@ -95,8 +95,8 @@ class Operation
         $this->expects = is_null($expects) ? null : $expects::iri();
         $this->returns = is_null($returns) ? null : $returns::iri();
         $this->statuses = $statuses;
-        $this->expectsHeaders = $expectsHeader;
-        $this->returnsHeaders = $returnsHeader;
+        $this->expectsHeader = $expectsHeader;
+        $this->returnsHeader = $returnsHeader;
     }
 
     /**
@@ -113,8 +113,8 @@ class Operation
             'hydra:expects' => $this->expects,
             'hydra:returns' => $this->returns,
             'hydra:possibleStatus' => $this->statuses,
-            'hydra:expectsHeader' => $this->expectsHeaders,
-            'hydra:returnsHeader' => $this->returnsHeaders,
+            'hydra:expectsHeader' => $this->expectsHeader,
+            'hydra:returnsHeader' => $this->returnsHeader,
         ];
 
         // Filter out keys for which no values have been set
