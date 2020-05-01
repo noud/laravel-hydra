@@ -2,7 +2,7 @@
 
 namespace Arbee\LaravelHydra;
 
-use Arbee\LaravelHydra\Http\Resources\EntrypointClass;
+use Arbee\LaravelHydra\Hydra\SupportedClassCollection;
 use Illuminate\Support\ServiceProvider;
 
 class HydraServiceProvider extends ServiceProvider
@@ -38,9 +38,13 @@ class HydraServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(
-            SupportedClassRegistry::class,
+            SupportedClassCollection::class,
             function () {
-                return new SupportedClassRegistry($this->supportedClasses);
+                $classObjects = array_map(function ($class) {
+                    return new $class();
+                }, $this->supportedClasses);
+                return empty($classObjects) ? new SupportedClassCollection()
+                    : new SupportedClassCollection(...$classObjects);
             }
         );
     }

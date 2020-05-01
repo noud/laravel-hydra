@@ -18,7 +18,7 @@ class JsonLdResponseTest extends TestCase
     public function itSetsLinkHeader()
     {
         $response = new JsonLdResponse();
-        $link = '<http://localhost/docs.jsonld>rel="http://www.w3.org/ns/hydra/core#apiDocumentation"';
+        $link = '<http://localhost/docs>rel="http://www.w3.org/ns/hydra/core#apiDocumentation"';
         $this->assertTrue($response->headers->get('Link') == $link);
     }
 }

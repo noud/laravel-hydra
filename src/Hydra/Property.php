@@ -23,6 +23,16 @@ class Property
     }
 
     /**
+     * Get the IRI
+     *
+     * @return string
+     */
+    public function iri(): string
+    {
+        return $this->iri;
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array

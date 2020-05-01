@@ -13,26 +13,26 @@ interface SupportedClass
      *
      * @return string
      */
-    public static function iri(): string;
+    public function iri(): string;
 
     /**
      * Get the class title
      *
      * @return string
      */
-    public static function title(): string;
+    public function title(): string;
 
     /**
      * Get the properties this class supports
      *
      * @return \Arbee\LaravelHydra\Hydra\SupportedPropertyCollection
      */
-    public static function supportedProperties(): SupportedPropertyCollection;
+    public function supportedProperties(): SupportedPropertyCollection;
 
     /**
      * Get the operations this class supports
      *
      * @return \Arbee\LaravelHydra\Hydra\SupportedOperationCollection
      */
-    public static function supportedOperations(): SupportedOperationCollection;
+    public function supportedOperations(): SupportedOperationCollection;
 }

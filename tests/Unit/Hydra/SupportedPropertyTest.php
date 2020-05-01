@@ -11,10 +11,11 @@ class SupportedPropertyTest extends TestCase
     /** @test */
     public function itCanBeRepresentedAsAnArray()
     {
-        $supportedProperty = new SupportedProperty($property = new Property('property'));
+        $supportedProperty = new SupportedProperty($property = new Property('property'), $title = 'Test');
         $asArray = $supportedProperty->toArray();
         $expected = [
             '@type' => 'hydra:SupportedProperty',
+            'hydra:title' => $title,
             'hydra:property' => $property->toArray(),
             'owl:deprecated' => false,
             'hydra:required' => false,
@@ -27,7 +28,7 @@ class SupportedPropertyTest extends TestCase
     /** @test */
     public function itCanBeMarkedAsRequired()
     {
-        $supportedProperty = new SupportedProperty(new Property('property'));
+        $supportedProperty = new SupportedProperty(new Property('property'), 'Test');
         $original = $supportedProperty->toArray();
         $this->assertFalse($original['hydra:required']);
 
@@ -39,7 +40,7 @@ class SupportedPropertyTest extends TestCase
     /** @test */
     public function itCanBeMarkedAsDeprecated()
     {
-        $supportedProperty = new SupportedProperty(new Property('property'));
+        $supportedProperty = new SupportedProperty(new Property('property'), 'Test');
         $original = $supportedProperty->toArray();
         $this->assertFalse($original['owl:deprecated']);
 
@@ -51,7 +52,7 @@ class SupportedPropertyTest extends TestCase
     /** @test */
     public function itCanBeMarkedAsReadOnly()
     {
-        $supportedProperty = new SupportedProperty(new Property('property'));
+        $supportedProperty = new SupportedProperty(new Property('property'), 'Test');
         $original = $supportedProperty->toArray();
         $this->assertTrue($original['hydra:writable']);
 
@@ -63,7 +64,7 @@ class SupportedPropertyTest extends TestCase
     /** @test */
     public function itCanBeMarkedAsWriteOnly()
     {
-        $supportedProperty = new SupportedProperty(new Property('property'));
+        $supportedProperty = new SupportedProperty(new Property('property'), 'Test');
         $original = $supportedProperty->toArray();
         $this->assertTrue($original['hydra:readable']);
 

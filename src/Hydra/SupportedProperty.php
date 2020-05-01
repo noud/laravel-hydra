@@ -5,6 +5,11 @@ namespace Arbee\LaravelHydra\Hydra;
 class SupportedProperty
 {
     /**
+     * @var string
+     */
+    protected $title;
+
+    /**
      * @var boolean
      */
     protected $deprecated = false;
@@ -25,16 +30,43 @@ class SupportedProperty
     protected $required = false;
 
     /**
+     * @var \Arbee\LaravelHydra\Hydra\Property
+     */
+    protected $property;
+
+    /**
      * @var string
      */
     protected $type = 'hydra:SupportedProperty';
 
     /**
      * @param \Arbee\LaravelHydra\Hydra\Property $property
+     * @param string $title
      */
-    public function __construct(Property $property)
+    public function __construct(Property $property, string $title)
     {
         $this->property = $property;
+        $this->title = $title;
+    }
+
+    /**
+     * Get the title of the supported property
+     *
+     * @return string
+     */
+    public function title(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * Get the IRI of the underlying property
+     *
+     * @return string
+     */
+    public function propertyIri(): string
+    {
+        return $this->property->iri();
     }
 
     /**
@@ -82,6 +114,7 @@ class SupportedProperty
     {
         return [
             '@type' => $this->type,
+            'hydra:title' => $this->title,
             'hydra:property' => $this->property->toArray(),
             'owl:deprecated' => $this->deprecated,
             'hydra:required' => $this->required,

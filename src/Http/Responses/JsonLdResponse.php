@@ -2,7 +2,6 @@
 
 namespace Arbee\LaravelHydra\Http\Responses;
 
-use Arbee\LaravelHydra\Http\Controllers\DocsController;
 use Illuminate\Http\JsonResponse;
 
 class JsonLdResponse extends JsonResponse
@@ -15,7 +14,7 @@ class JsonLdResponse extends JsonResponse
      */
     public function __construct($data = null, $status = 200, $headers = [], $options = 0)
     {
-        $docsUrl = action(DocsController::class);
+        $docsUrl = url(config('hydra.docs_url'));
         $headers = array_merge(
             $headers,
             [

@@ -6,7 +6,7 @@ use Arbee\LaravelHydra\Tests\TestCase;
 
 class DocsTest extends TestCase
 {
-    const DOCS_URI = '/docs.jsonld';
+    const DOCS_URI = '/docs';
 
     /** @test */
     public function itReturnsJsonLdContentTypeHeader()

@@ -7,10 +7,12 @@ use Illuminate\Support\Collection;
 class SupportedPropertyCollection extends Collection
 {
     /**
-     * @param \Arbee\LaravelHydra\Hydra\SupportedProperty ...$properties
+     * Transform this supported property collection into a contextualized value
      */
-    public function __construct(SupportedProperty ...$properties)
+    public function toContext(): self
     {
-        parent::__construct($properties);
+        return $this->mapWithKeys(function (SupportedProperty $property) {
+            return [$property->title() => $property->propertyIri()];
+        });
     }
 }

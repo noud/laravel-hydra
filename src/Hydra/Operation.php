@@ -2,7 +2,6 @@
 
 namespace Arbee\LaravelHydra\Hydra;
 
-use Arbee\LaravelHydra\Support\HydraUtils;
 use InvalidArgumentException;
 
 class Operation
@@ -22,16 +21,16 @@ class Operation
     protected $title;
 
     /**
-     * The input type for the operation
+     * The iri of the input type for the operation
      *
-     * @var \Arbee\LaravelHydra\Contracts\SupportedClass | null
+     * @var string | null
      */
     protected $expects;
 
     /**
-     * The return type of the operation
+     * The iri of the return type of the operation
      *
-     * @var \Arbee\LaravelHydra\Contracts\SupportedClass | null
+     * @var string | null
      */
     protected $returns;
 
@@ -72,7 +71,7 @@ class Operation
      * @param string $expectsHeaders
      * @param string $returnsHeaders
      *
-     * @todo Validate arguments?
+     * @todo Validate that expects and return match an IRI from a supported class?
      */
     public function __construct(
         string $method,
@@ -87,13 +86,10 @@ class Operation
             throw new InvalidArgumentException('Operation method is not valid');
         }
 
-        HydraUtils::assertValidSupportedClassOrNull($expects);
-        HydraUtils::assertValidSupportedClassOrNull($returns);
-
         $this->method = $method;
         $this->title = $title;
-        $this->expects = is_null($expects) ? null : $expects::iri();
-        $this->returns = is_null($returns) ? null : $returns::iri();
+        $this->expects = $expects;
+        $this->returns = $returns;
         $this->statuses = $statuses;
         $this->expectsHeader = $expectsHeader;
         $this->returnsHeader = $returnsHeader;

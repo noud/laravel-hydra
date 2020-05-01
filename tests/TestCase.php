@@ -20,5 +20,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('app.debug', true);
+        $app['config']->set('hydra.docs_url', '/docs');
+        $app['config']->set('hydra.context_base_url', '/context');
     }
 }

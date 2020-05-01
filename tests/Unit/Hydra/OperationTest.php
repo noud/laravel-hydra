@@ -17,8 +17,8 @@ class OperationTest extends TestCase
         $operation = new Operation(
             $method = 'POST',
             $title = 'Create a test object',
-            BasicSupportedClass::class,
-            BasicSupportedClass::class,
+            $expects = 'ExpectsIRI',
+            $returns = 'ReturnsIRI',
             $statuses = ['422' => 'Validation failed'],
             $expectHeader = 'Bearer',
             $returnHeader = 'Link'
@@ -28,8 +28,8 @@ class OperationTest extends TestCase
             '@type' => 'hydra:Operation',
             'hydra:method' => $method,
             'hydra:title' => $title,
-            'hydra:expects' => BasicSupportedClass::iri(),
-            'hydra:returns' => BasicSupportedClass::iri(),
+            'hydra:expects' => $expects,
+            'hydra:returns' => $returns,
             'hydra:possibleStatus' => $statuses,
             'hydra:expectsHeader' => $expectHeader,
             'hydra:returnsHeader' => $returnHeader
@@ -44,14 +44,14 @@ class OperationTest extends TestCase
             $method = 'GET',
             $title = 'Fetch a test object',
             null,
-            BasicSupportedClass::class
+            $returns = 'ReturnsIRI'
         );
         $asArray = $operation->toArray();
         $expected = [
             '@type' => 'hydra:Operation',
             'hydra:method' => $method,
             'hydra:title' => $title,
-            'hydra:returns' => BasicSupportedClass::iri(),
+            'hydra:returns' => $returns,
         ];
         $this->assertEquals($expected, $asArray);
     }
@@ -64,31 +64,7 @@ class OperationTest extends TestCase
             $method = 'TEST',
             $title = 'Fetch a test object',
             null,
-            BasicSupportedClass::class
-        );
-    }
-
-    /** @test */
-    public function itThrowsAnInvalidArgumentExceptionIfExpectsArgumentIsNotValidSupportedClass()
-    {
-        $this->expectException(InvalidSupportedClassException::class);
-        new Operation(
-            $method = 'POST',
-            $title = 'Create a test object',
-            InvalidSupportedClass::class,
-            null
-        );
-    }
-
-    /** @test */
-    public function itThrowsAnInvalidArgumentExceptionIfReturnsArgumentIsNotValidSupportedClass()
-    {
-        $this->expectException(InvalidSupportedClassException::class);
-        new Operation(
-            $method = 'POST',
-            $title = 'Create a test object',
-            null,
-            InvalidSupportedClass::class
+            'ReturnsIRI'
         );
     }
 }

@@ -8,22 +8,22 @@ use Arbee\LaravelHydra\Hydra\SupportedOperationCollection;
 
 class BasicSupportedClass implements SupportedClass
 {
-    public static function iri(): string
+    public function iri(): string
     {
         return 'TestId';
     }
 
-    public static function title(): string
+    public function title(): string
     {
         return 'TestTitle';
     }
 
-    public static function supportedProperties(): SupportedPropertyCollection
+    public function supportedProperties(): SupportedPropertyCollection
     {
         return new SupportedPropertyCollection();
     }
 
-    public static function supportedOperations(): SupportedOperationCollection
+    public function supportedOperations(): SupportedOperationCollection
     {
         return new SupportedOperationCollection();
     }
