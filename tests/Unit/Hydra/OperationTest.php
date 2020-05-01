@@ -2,10 +2,10 @@
 
 namespace Arbee\LaravelHydra\Tests\Unit\Hydra;
 
-use Arbee\LaravelHydra\Exceptions\InvalidHydraClassException;
+use Arbee\LaravelHydra\Exceptions\InvalidSupportedClassException;
 use Arbee\LaravelHydra\Hydra\Operation;
-use Arbee\LaravelHydra\Tests\Stubs\BasicHydraClass;
-use Arbee\LaravelHydra\Tests\Stubs\InvalidHydraClass;
+use Arbee\LaravelHydra\Tests\Stubs\BasicSupportedClass;
+use Arbee\LaravelHydra\Tests\Stubs\InvalidSupportedClass;
 use Arbee\LaravelHydra\Tests\TestCase;
 use InvalidArgumentException;
 
@@ -17,8 +17,8 @@ class OperationTest extends TestCase
         $operation = new Operation(
             $method = 'POST',
             $title = 'Create a test object',
-            BasicHydraClass::class,
-            BasicHydraClass::class,
+            BasicSupportedClass::class,
+            BasicSupportedClass::class,
             $statuses = ['422' => 'Validation failed'],
             $expectHeader = 'Bearer',
             $returnHeader = 'Link'
@@ -28,8 +28,8 @@ class OperationTest extends TestCase
             '@type' => 'hydra:Operation',
             'hydra:method' => $method,
             'hydra:title' => $title,
-            'hydra:expects' => BasicHydraClass::iri(),
-            'hydra:returns' => BasicHydraClass::iri(),
+            'hydra:expects' => BasicSupportedClass::iri(),
+            'hydra:returns' => BasicSupportedClass::iri(),
             'hydra:possibleStatus' => $statuses,
             'hydra:expectsHeader' => $expectHeader,
             'hydra:returnsHeader' => $returnHeader
@@ -44,14 +44,14 @@ class OperationTest extends TestCase
             $method = 'GET',
             $title = 'Fetch a test object',
             null,
-            BasicHydraClass::class
+            BasicSupportedClass::class
         );
         $asArray = $operation->toArray();
         $expected = [
             '@type' => 'hydra:Operation',
             'hydra:method' => $method,
             'hydra:title' => $title,
-            'hydra:returns' => BasicHydraClass::iri(),
+            'hydra:returns' => BasicSupportedClass::iri(),
         ];
         $this->assertEquals($expected, $asArray);
     }
@@ -64,31 +64,31 @@ class OperationTest extends TestCase
             $method = 'TEST',
             $title = 'Fetch a test object',
             null,
-            BasicHydraClass::class
+            BasicSupportedClass::class
         );
     }
 
     /** @test */
-    public function itThrowsAnInvalidArgumentExceptionIfExpectsArgumentIsNotValidHydraClass()
+    public function itThrowsAnInvalidArgumentExceptionIfExpectsArgumentIsNotValidSupportedClass()
     {
-        $this->expectException(InvalidHydraClassException::class);
+        $this->expectException(InvalidSupportedClassException::class);
         new Operation(
             $method = 'POST',
             $title = 'Create a test object',
-            InvalidHydraClass::class,
+            InvalidSupportedClass::class,
             null
         );
     }
 
     /** @test */
-    public function itThrowsAnInvalidArgumentExceptionIfReturnsArgumentIsNotValidHydraClass()
+    public function itThrowsAnInvalidArgumentExceptionIfReturnsArgumentIsNotValidSupportedClass()
     {
-        $this->expectException(InvalidHydraClassException::class);
+        $this->expectException(InvalidSupportedClassException::class);
         new Operation(
             $method = 'POST',
             $title = 'Create a test object',
             null,
-            InvalidHydraClass::class
+            InvalidSupportedClass::class
         );
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Arbee\LaravelHydra\Support;
 
-use Arbee\LaravelHydra\Contracts\HydraClass;
-use Arbee\LaravelHydra\Exceptions\InvalidHydraClassException;
+use Arbee\LaravelHydra\Contracts\SupportedClass;
+use Arbee\LaravelHydra\Exceptions\InvalidSupportedClassException;
 
 class HydraUtils
 {
@@ -12,11 +12,11 @@ class HydraUtils
      *
      * @param string $class
      */
-    public static function assertValidHydraClass(string $class)
+    public static function assertValidSupportedClass(string $class)
     {
         $interfaces = class_implements($class);
-        if (!$interfaces || !in_array(HydraClass::class, $interfaces)) {
-            throw new InvalidHydraClassException($class);
+        if (!$interfaces || !in_array(SupportedClass::class, $interfaces)) {
+            throw new InvalidSupportedClassException($class);
         }
     }
 
@@ -25,11 +25,11 @@ class HydraUtils
      *
      * @param string|null $class
      */
-    public static function assertValidHydraClassOrNull(?string $class)
+    public static function assertValidSupportedClassOrNull(?string $class)
     {
         if (is_null($class)) {
             return;
         }
-        self::assertValidHydraClass($class);
+        self::assertValidSupportedClass($class);
     }
 }

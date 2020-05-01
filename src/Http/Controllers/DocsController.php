@@ -3,21 +3,21 @@
 namespace Arbee\LaravelHydra\Http\Controllers;
 
 use Arbee\LaravelHydra\Http\Responses\JsonLdResponse;
-use Arbee\LaravelHydra\HydraClassRegistry;
+use Arbee\LaravelHydra\SupportedClassRegistry;
 
 class DocsController
 {
     /**
      * The Hydra class registry
      *
-     * @var \Arbee\LaravelHydra\HydraClassRegistry
+     * @var \Arbee\LaravelHydra\SupportedClassRegistry
      */
     protected $classes;
 
     /**
-     * @param \Arbee\LaravelHydra\HydraClassRegistry $registry
+     * @param \Arbee\LaravelHydra\SupportedClassRegistry $registry
      */
-    public function __construct(HydraClassRegistry $classes)
+    public function __construct(SupportedClassRegistry $classes)
     {
         $this->classes = $classes;
     }

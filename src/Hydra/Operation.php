@@ -24,14 +24,14 @@ class Operation
     /**
      * The input type for the operation
      *
-     * @var \Arbee\LaravelHydra\Contracts\HydraClass | null
+     * @var \Arbee\LaravelHydra\Contracts\SupportedClass | null
      */
     protected $expects;
 
     /**
      * The return type of the operation
      *
-     * @var \Arbee\LaravelHydra\Contracts\HydraClass | null
+     * @var \Arbee\LaravelHydra\Contracts\SupportedClass | null
      */
     protected $returns;
 
@@ -87,8 +87,8 @@ class Operation
             throw new InvalidArgumentException('Operation method is not valid');
         }
 
-        HydraUtils::assertValidHydraClassOrNull($expects);
-        HydraUtils::assertValidHydraClassOrNull($returns);
+        HydraUtils::assertValidSupportedClassOrNull($expects);
+        HydraUtils::assertValidSupportedClassOrNull($returns);
 
         $this->method = $method;
         $this->title = $title;

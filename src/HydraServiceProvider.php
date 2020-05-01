@@ -38,9 +38,9 @@ class HydraServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(
-            HydraClassRegistry::class,
+            SupportedClassRegistry::class,
             function () {
-                return new HydraClassRegistry($this->supportedClasses);
+                return new SupportedClassRegistry($this->supportedClasses);
             }
         );
     }

@@ -5,7 +5,7 @@ namespace Arbee\LaravelHydra\Contracts;
 use Arbee\LaravelHydra\Hydra\SupportedPropertyCollection;
 use Arbee\LaravelHydra\Hydra\SupportedOperationCollection;
 
-interface HydraClass
+interface SupportedClass
 {
     /**
      * Get the unique IRI for this class. If this is not a URL, it will be treated as a definition from the

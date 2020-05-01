@@ -2,13 +2,13 @@
 
 namespace Arbee\LaravelHydra\Tests;
 
-use Arbee\LaravelHydra\Exceptions\InvalidHydraClassException;
+use Arbee\LaravelHydra\Exceptions\InvalidSupportedClassException;
 use Arbee\LaravelHydra\Hydra\SupportedOperationCollection;
 use Arbee\LaravelHydra\Hydra\SupportedPropertyCollection;
 use Arbee\LaravelHydra\Serializers\SupportedClassSerializer;
-use Arbee\LaravelHydra\Tests\Stubs\BasicHydraClass;
-use Arbee\LaravelHydra\Tests\Stubs\InvalidHydraClass;
-use Arbee\LaravelHydra\Tests\Stubs\SchemaHydraClass;
+use Arbee\LaravelHydra\Tests\Stubs\BasicSupportedClass;
+use Arbee\LaravelHydra\Tests\Stubs\InvalidSupportedClass;
+use Arbee\LaravelHydra\Tests\Stubs\SchemaSupportedClass;
 use PHPUnit\Framework\TestCase;
 
 class SupportedClassSerializerTest extends TestCase
@@ -16,11 +16,11 @@ class SupportedClassSerializerTest extends TestCase
     /** @test */
     public function itSerializesClassWithLocalContextId()
     {
-        $classDoc = SupportedClassSerializer::toArray(BasicHydraClass::class);
+        $classDoc = SupportedClassSerializer::toArray(BasicSupportedClass::class);
         $expected = [
-            '@id' => 'vocab:' . BasicHydraClass::iri(),
+            '@id' => 'vocab:' . BasicSupportedClass::iri(),
             '@type' => 'hydra:Class',
-            'hydra:title' => BasicHydraClass::title(),
+            'hydra:title' => BasicSupportedClass::title(),
             'hydra:supportedProperties' => new SupportedPropertyCollection(),
             'hydra:supportedOperations' => new SupportedOperationCollection(),
         ];
@@ -30,11 +30,11 @@ class SupportedClassSerializerTest extends TestCase
     /** @test */
     public function itSerializesClassWithRemoteContextId()
     {
-        $classDoc = SupportedClassSerializer::toArray(SchemaHydraClass::class);
+        $classDoc = SupportedClassSerializer::toArray(SchemaSupportedClass::class);
         $expected = [
-            '@id' => SchemaHydraClass::iri(),
+            '@id' => SchemaSupportedClass::iri(),
             '@type' => 'hydra:Class',
-            'hydra:title' => SchemaHydraClass::title(),
+            'hydra:title' => SchemaSupportedClass::title(),
             'hydra:supportedProperties' => new SupportedPropertyCollection(),
             'hydra:supportedOperations' => new SupportedOperationCollection(),
         ];
@@ -42,9 +42,9 @@ class SupportedClassSerializerTest extends TestCase
     }
 
     /** @test */
-    public function itThrowsAnInvalidArgumentExceptionIfInputDoesNotImplementHydraClass()
+    public function itThrowsAnInvalidArgumentExceptionIfInputDoesNotImplementSupportedClass()
     {
-        $this->expectException(InvalidHydraClassException::class);
-        SupportedClassSerializer::toArray(InvalidHydraClass::class);
+        $this->expectException(InvalidSupportedClassException::class);
+        SupportedClassSerializer::toArray(InvalidSupportedClass::class);
     }
 }

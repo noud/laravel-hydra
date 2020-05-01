@@ -2,11 +2,11 @@
 
 namespace Arbee\LaravelHydra\Tests\Stubs;
 
-use Arbee\LaravelHydra\Contracts\HydraClass;
+use Arbee\LaravelHydra\Contracts\SupportedClass;
 use Arbee\LaravelHydra\Hydra\SupportedPropertyCollection;
 use Arbee\LaravelHydra\Hydra\SupportedOperationCollection;
 
-class BasicHydraClass implements HydraClass
+class BasicSupportedClass implements SupportedClass
 {
     public static function iri(): string
     {

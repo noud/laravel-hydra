@@ -15,7 +15,7 @@ class SupportedClassSerializer
      */
     public static function toArray(string $class): array
     {
-        HydraUtils::assertValidHydraClass($class);
+        HydraUtils::assertValidSupportedClass($class);
 
         $iri = filter_var($class::iri(), FILTER_VALIDATE_URL);
         return [

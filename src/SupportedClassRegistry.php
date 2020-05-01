@@ -4,7 +4,7 @@ namespace Arbee\LaravelHydra;
 
 use Arbee\LaravelHydra\Serializers\SupportedClassSerializer;
 
-class HydraClassRegistry
+class SupportedClassRegistry
 {
     /**
      * The supported classes
@@ -38,8 +38,8 @@ class HydraClassRegistry
      */
     public function toJsonLd(): string
     {
-        $classes = array_map(function (string $hydraClass) {
-            return SupportedClassSerializer::toArray($hydraClass);
+        $classes = array_map(function (string $class) {
+            return SupportedClassSerializer::toArray($class);
         }, $this->classes);
 
         return json_encode($classes, JSON_THROW_ON_ERROR);
