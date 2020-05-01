@@ -17,7 +17,7 @@ class LinkProperty extends Property
     /**
      * @var string
      */
-    protected $type = 'hydra:Link';
+    protected $type = Vocabulary::CLASS_LINK;
 
     /**
      * @param string $iri
@@ -36,6 +36,6 @@ class LinkProperty extends Property
      */
     public function toArray(): array
     {
-        return array_merge(parent::toArray(), ['hydra:supportedOperations' => $this->supportedOperations]);
+        return array_merge(parent::toArray(), [Vocabulary::SUPPORTED_OPERATIONS => $this->supportedOperations]);
     }
 }

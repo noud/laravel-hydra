@@ -4,6 +4,7 @@ namespace Arbee\LaravelHydra\Http\Controllers;
 
 use Arbee\LaravelHydra\Http\Responses\JsonLdResponse;
 use Arbee\LaravelHydra\Hydra\SupportedClassCollection;
+use Arbee\LaravelHydra\Hydra\Vocabulary;
 
 class DocsController
 {
@@ -35,13 +36,11 @@ class DocsController
                     '@vocab' => url(config('hydra.docs_url')),
                     'hydra' => 'http://www.w3.org/ns/hydra/core#',
                     'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
-                    'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
-                    'owl' => 'http://www.w3.org/2002/07/owl#',
                 ],
                 '@id' => url(config('hydra.docs_url')),
                 '@type' => 'hydra:ApiDocumentation',
-                'hydra:title' => config('hydra.title'),
-                'hydra:description' => config('hydra.description'),
+                Vocabulary::TITLE => config('hydra.title'),
+                Vocabulary::DESCRIPTION => config('hydra.description'),
                 'hydra:entrypoint' => config('hydra.entrypoint'),
                 'hydra:supportedClass' => $this->classes->toJsonLd(),
             ]

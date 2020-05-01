@@ -60,7 +60,7 @@ class Operation
      *
      * @var string
      */
-    protected $type = 'hydra:Operation';
+    protected $type = Vocabulary::CLASS_OPERATION;
 
     /**
      * @param string $method
@@ -104,13 +104,13 @@ class Operation
     {
         $operation = [
             '@type' => $this->type,
-            'hydra:method' => strtoupper($this->method),
-            'hydra:title' => $this->title,
-            'hydra:expects' => $this->expects,
-            'hydra:returns' => $this->returns,
-            'hydra:possibleStatus' => $this->statuses,
-            'hydra:expectsHeader' => $this->expectsHeader,
-            'hydra:returnsHeader' => $this->returnsHeader,
+            Vocabulary::METHOD => strtoupper($this->method),
+            Vocabulary::TITLE => $this->title,
+            Vocabulary::EXPECTS => $this->expects,
+            Vocabulary::RETURNS => $this->returns,
+            Vocabulary::POSSIBLE_STATUS => $this->statuses,
+            Vocabulary::EXPECTS_HEADER => $this->expectsHeader,
+            Vocabulary::RETURNS_HEADER => $this->returnsHeader,
         ];
 
         // Filter out keys for which no values have been set

@@ -17,7 +17,6 @@ class SupportedPropertyTest extends TestCase
             '@type' => 'hydra:SupportedProperty',
             'hydra:title' => $title,
             'hydra:property' => $property->toArray(),
-            'owl:deprecated' => false,
             'hydra:required' => false,
             'hydra:readable' => true,
             'hydra:writable' => true,
@@ -35,18 +34,6 @@ class SupportedPropertyTest extends TestCase
         $supportedProperty->required();
         $required = $supportedProperty->toArray();
         $this->assertTrue($required['hydra:required']);
-    }
-
-    /** @test */
-    public function itCanBeMarkedAsDeprecated()
-    {
-        $supportedProperty = new SupportedProperty(new Property('property'), 'Test');
-        $original = $supportedProperty->toArray();
-        $this->assertFalse($original['owl:deprecated']);
-
-        $supportedProperty->deprecated();
-        $required = $supportedProperty->toArray();
-        $this->assertTrue($required['owl:deprecated']);
     }
 
     /** @test */

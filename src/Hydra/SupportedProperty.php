@@ -37,7 +37,7 @@ class SupportedProperty
     /**
      * @var string
      */
-    protected $type = 'hydra:SupportedProperty';
+    protected $type = Vocabulary::CLASS_SUPPORTED_PROPERTY;
 
     /**
      * @param \Arbee\LaravelHydra\Hydra\Property $property
@@ -67,15 +67,6 @@ class SupportedProperty
     public function propertyIri(): string
     {
         return $this->property->iri();
-    }
-
-    /**
-     * Mark the supported property as deprecated
-     */
-    public function deprecated()
-    {
-        $this->deprecated = true;
-        return $this;
     }
 
     /**
@@ -114,12 +105,11 @@ class SupportedProperty
     {
         return [
             '@type' => $this->type,
-            'hydra:title' => $this->title,
-            'hydra:property' => $this->property->toArray(),
-            'owl:deprecated' => $this->deprecated,
-            'hydra:required' => $this->required,
-            'hydra:readable' => $this->readable,
-            'hydra:writable' => $this->writable,
+            Vocabulary::TITLE => $this->title,
+            Vocabulary::PROPERTY => $this->property->toArray(),
+            Vocabulary::REQUIRED => $this->required,
+            Vocabulary::READABLE => $this->readable,
+            Vocabulary::WRITABLE => $this->writable,
         ];
     }
 }

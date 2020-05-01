@@ -12,7 +12,7 @@ class Property
     /**
      * @var string
      */
-    protected $type = 'rdf:Property';
+    protected $type = Vocabulary::CLASS_PROPERTY;
 
     /**
      * @param string $iri

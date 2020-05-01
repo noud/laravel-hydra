@@ -34,6 +34,9 @@ class HydraServiceProvider extends ServiceProvider
 
     /**
      * Register services for the application
+     *
+     * @todo maybe pass some application state (e.g. user, config, request) into the supported class
+     * instances so that classes can conditionally define supported properties and operations
      */
     public function register()
     {
@@ -43,8 +46,7 @@ class HydraServiceProvider extends ServiceProvider
                 $classObjects = array_map(function ($class) {
                     return new $class();
                 }, $this->supportedClasses);
-                return empty($classObjects) ? new SupportedClassCollection()
-                    : new SupportedClassCollection(...$classObjects);
+                return new SupportedClassCollection($classObjects);
             }
         );
     }

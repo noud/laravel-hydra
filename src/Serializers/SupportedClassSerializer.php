@@ -3,6 +3,7 @@
 namespace Arbee\LaravelHydra\Serializers;
 
 use Arbee\LaravelHydra\Contracts\SupportedClass;
+use Arbee\LaravelHydra\Hydra\Vocabulary;
 
 class SupportedClassSerializer
 {
@@ -15,13 +16,12 @@ class SupportedClassSerializer
      */
     public static function toArray(SupportedClass $class): array
     {
-        $iri = filter_var($class->iri(), FILTER_VALIDATE_URL);
         return [
-            '@id' => $iri ?: 'vocab:' . $class->iri(),
-            '@type' => 'hydra:Class',
-            'hydra:title' => $class->title(),
-            'hydra:supportedProperties' => $class->supportedProperties(),
-            'hydra:supportedOperations' => $class->supportedOperations(),
+            '@id' => $class->iri(),
+            '@type' => Vocabulary::CLASS_CLASS,
+            Vocabulary::TITLE => $class->title(),
+            Vocabulary::SUPPORTED_PROPERTIES => $class->supportedProperties(),
+            Vocabulary::SUPPORTED_OPERATIONS => $class->supportedOperations(),
         ];
     }
 }

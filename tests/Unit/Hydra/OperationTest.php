@@ -2,10 +2,7 @@
 
 namespace Arbee\LaravelHydra\Tests\Unit\Hydra;
 
-use Arbee\LaravelHydra\Exceptions\InvalidSupportedClassException;
 use Arbee\LaravelHydra\Hydra\Operation;
-use Arbee\LaravelHydra\Tests\Stubs\BasicSupportedClass;
-use Arbee\LaravelHydra\Tests\Stubs\InvalidSupportedClass;
 use Arbee\LaravelHydra\Tests\TestCase;
 use InvalidArgumentException;
 
