@@ -12,7 +12,7 @@ interface SupportedClass
      *
      * @return string
      */
-    public function documents(): string;
+    public function hydraClass(): string;
 
     /**
      * Get the unique IRI for this class document. If this is not a URL, it will be treated as a definition from the
@@ -35,6 +35,15 @@ interface SupportedClass
      * @return \Arbee\LaravelHydra\Hydra\SupportedPropertyCollection
      */
     public function supportedProperties(): SupportedPropertyCollection;
+
+    /**
+     * Return the values of the supported properties given an instance of the hydra class this documents
+     *
+     * @param \Arbee\LaravelHydra\Contracts\JsonLdable $hydraClass
+     *
+     * @return array
+     */
+    public function supportedPropertyValues(JsonLdable $hydraClass): array;
 
     /**
      * Get the operations this class supports

@@ -16,7 +16,14 @@ interface JsonLdable
      *
      * @return string
      */
-    public function type(): string;
+    public function ldType(): string;
+
+    /**
+     * Get an attribute value from the Hydra class
+     *
+     * @param mixed $key
+     */
+    public function getAttribute($key);
 
     /**
      * Returns the attributes as JSON

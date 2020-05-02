@@ -11,11 +11,9 @@ use Arbee\LaravelHydra\Http\Responses\JsonLdResponse;
 class HydraResource implements Responsable
 {
     /**
-     * The URL of the context for this resource
-     *
-     * @var string
+     * @var \Arbee\LaravelHydra\Contracts\SupportedClass
      */
-    protected $contextUrl;
+    protected $classDoc;
 
     /**
      * @var \Arbee\LaravelHydra\Contracts\JsonLdable
@@ -28,11 +26,13 @@ class HydraResource implements Responsable
      */
     public function __construct(SupportedClass $class, JsonLdable $resource)
     {
-        if ($class->documents() !== get_class($resource)) {
-            throw new MismatchedContextException($class, $resource);
-        }
-        $this->contextUrl = url(config('hydra.context_base_url')) . '/' . $class->title();
+        $this->classDoc = $class;
         $this->resource = $resource;
+    }
+
+    private function getContextUrl(): string
+    {
+        return url(config('hydra.context_base_url')) . '/' . $this->class->title();
     }
 
     /**
@@ -45,11 +45,11 @@ class HydraResource implements Responsable
     {
         return new JsonLdResponse(array_merge(
             [
-                '@context' => $this->contextUrl,
+                '@context' => $this->getContextUrl(),
                 '@id' => $this->resource->iri(),
-                '@type' => $this->resource->type(),
+                '@type' => $this->resource->ldType(),
             ],
-            $this->resource->jsonLdAttributesToArray()
+            $this->classDoc->supportedPropertyValues($this->resource)
         ));
     }
 }
