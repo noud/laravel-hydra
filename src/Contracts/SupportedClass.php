@@ -8,7 +8,14 @@ use Arbee\LaravelHydra\Hydra\SupportedOperationCollection;
 interface SupportedClass
 {
     /**
-     * Get the unique IRI for this class. If this is not a URL, it will be treated as a definition from the
+     * The class that this object documents
+     *
+     * @return string
+     */
+    public function documents(): string;
+
+    /**
+     * Get the unique IRI for this class document. If this is not a URL, it will be treated as a definition from the
      * internal Hydra vocabulary
      *
      * @return string

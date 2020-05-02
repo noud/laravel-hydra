@@ -46,7 +46,8 @@ class HydraServiceProvider extends ServiceProvider
                 $classObjects = array_map(function ($class) {
                     return new $class();
                 }, $this->supportedClasses);
-                return new SupportedClassCollection($classObjects);
+                $keyedClassObjects = array_combine(array_keys($this->supportedClasses), $classObjects);
+                return new SupportedClassCollection($keyedClassObjects);
             }
         );
     }

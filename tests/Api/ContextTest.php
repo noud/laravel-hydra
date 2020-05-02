@@ -3,7 +3,7 @@
 namespace Arbee\LaravelHydra\Tests\Api;
 
 use Arbee\LaravelHydra\Hydra\SupportedClassCollection;
-use Arbee\LaravelHydra\Tests\Stubs\BasicSupportedClass;
+use Arbee\LaravelHydra\Tests\Stubs\Documents\BasicSupportedClass;
 use Arbee\LaravelHydra\Tests\TestCase;
 
 class ContextTest extends TestCase

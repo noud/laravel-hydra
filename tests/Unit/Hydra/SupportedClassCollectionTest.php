@@ -4,7 +4,7 @@ namespace Arbee\LaravelHydra\Tests\Unit\Hydra;
 
 use Arbee\LaravelHydra\Exceptions\ClassNotSupportedException;
 use Arbee\LaravelHydra\Hydra\SupportedClassCollection;
-use Arbee\LaravelHydra\Tests\Stubs\BasicSupportedClass;
+use Arbee\LaravelHydra\Tests\Stubs\Documents\BasicSupportedClass;
 use PHPUnit\Framework\TestCase;
 
 class SupportedClassCollectionTest extends TestCase

@@ -1,16 +1,22 @@
 <?php
 
-namespace Arbee\LaravelHydra\Tests\Stubs;
+namespace Arbee\LaravelHydra\Tests\Stubs\Documents;
 
 use Arbee\LaravelHydra\Contracts\SupportedClass;
-use Arbee\LaravelHydra\Hydra\SupportedOperationCollection;
 use Arbee\LaravelHydra\Hydra\SupportedPropertyCollection;
+use Arbee\LaravelHydra\Hydra\SupportedOperationCollection;
+use Arbee\LaravelHydra\Tests\Stubs\HydraClasses\BasicHydraClass;
 
-class RemoteIriSupportedClass implements SupportedClass
+class BasicSupportedClass implements SupportedClass
 {
     public function iri(): string
     {
-        return 'http://schema.org/';
+        return 'TestId';
+    }
+
+    public function documents(): string
+    {
+        return BasicHydraClass::class;
     }
 
     public function title(): string

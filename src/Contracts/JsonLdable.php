@@ -19,16 +19,9 @@ interface JsonLdable
     public function type(): string;
 
     /**
-     * Returns this JsonLdable as JsonLD
-     *
-     * @return array
-     */
-    public function toJsonLd(): array;
-
-    /**
      * Returns the attributes as JSON
      *
      * @return array
      */
-    public function attributesToJson(): array;
+    public function jsonLdAttributesToArray(): array;
 }
