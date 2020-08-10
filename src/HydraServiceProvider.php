@@ -22,14 +22,6 @@ class HydraServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadRoutesFrom(__DIR__.'/routes.php');
-
-        // Config path not available in Lumen
-        if (function_exists('config_path')) {
-            $this->publishes(
-                [__DIR__.'/config.php' => config_path('hydra.php')],
-                'config'
-            );
-        }
     }
 
     /**
@@ -40,6 +32,15 @@ class HydraServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // Config path not available in Lumen
+        if (function_exists('config_path')) {
+            $this->mergeConfigFrom(__DIR__ . '/config.php', 'hydra');
+            $this->publishes(
+                [__DIR__.'/config.php' => config_path('hydra.php')],
+                'hydra.config'
+            );
+        }
+
         $this->app->singleton(
             SupportedClassCollection::class,
             function () {
