@@ -19,7 +19,7 @@ class JsonLdResponse extends JsonResponse
             $headers,
             [
                 'Content-Type' => 'application/ld+json',
-                'Link' => "<${docsUrl}>rel=\"http://www.w3.org/ns/hydra/core#apiDocumentation\""
+                'Link' => "<${docsUrl}>; rel=\"http://www.w3.org/ns/hydra/core#apiDocumentation\""
             ]
         );
         parent::__construct($data, $status, $headers, $options);
